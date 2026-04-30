@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const base = "https://localhost:7227";
+const base = import.meta.env.VITE_API_BASE_URL;
 export async function getGithubAuthUrl() {
   const res = await axios.get(`${base}/auth/github/`, {
     credentials: "include",
