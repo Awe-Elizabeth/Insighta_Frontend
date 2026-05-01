@@ -25,7 +25,13 @@ export async function completeGithubAuth(code, state) {
 }
 
 export async function fetchUserData() {
-  const res = await axios.get(`/api/get_user`, {
+  const isDev = import.meta.env.DEV;
+
+  const url = isDev
+    ? "/api/get_user" // uses Vite proxy
+    : `${import.meta.env.VITE_API_BASE_URL}/api/users/me`;
+
+  const res = await axios.get(url, {
     withCredentials: true,
     headers: {
       "Content-Type": "application/json",
